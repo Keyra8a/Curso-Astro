@@ -1,17 +1,20 @@
 ---
-
+//Server Only
+const name = 'Keyra Yariely Grijalva Ochoa'
+import MainLayout from '../layouts/MainLayout.astro';
 ---
+<MainLayout title="Home Page">
+	<h1>Hola, {name}!</h1>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Index</title>
-	</head>
-	<body>
-		<h1>Hola mundo</h1>
-	</body>
-</html>
+	<p>Momento actual: {new Date().toLocaleTimeString()}	</p>
+	<p id="current-time">Momento actual real:</p>
+
+	<script>
+	//client only
+	const currentTimeElement = document.querySelector(
+		'#current-time'
+	) as HTMLElement;
+
+	currentTimeElement.innerText = `Momento actual real: ${new Date().toLocaleTimeString()}`;
+	</script>
+</MainLayout>
