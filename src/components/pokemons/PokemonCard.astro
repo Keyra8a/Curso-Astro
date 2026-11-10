@@ -1,0 +1,47 @@
+
+---
+interface PokemonCardProps {
+    name: string;
+    url: string;
+    isBig: boolean;
+}
+
+const { name, url, isBig = false } = Astro.props;
+
+const id = url.split("/").at(-2);
+
+const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/versions/generation-i/red-and-blue/${id}.png`;
+---
+
+<a
+    href={`/pokemons/${name}`}
+    class:list={[
+        'rounded flex flex-col justify-center items-center p-2',
+        {
+            'border': !isBig,
+        }
+    ]}
+>
+    <img
+        transition:name={`${name}-image`}
+        src={imageSrc}
+        alt={name}
+        class:list={[
+            {
+                'w-60 h-60': isBig,
+                'w-50 h-50': !isBig,
+            }
+        ]}
+    />
+
+    <span
+        class:list={[
+            'capitalize',
+            {
+                'text-4xl': isBig,
+            }
+        ]}
+    >
+        #{id} {name}
+    </span>
+</a>

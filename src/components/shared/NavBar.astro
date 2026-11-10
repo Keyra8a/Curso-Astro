@@ -1,0 +1,61 @@
+
+---
+const links = [
+    { href: '/', text: 'Listado' },
+    { href: '/pokemons/1', text: 'Paginado' },
+    { href: '/favorites', text: 'Favoritos' },
+    { href: '/islands', text: 'Islas' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="shadow bg-slate-900">
+    <div class="container flex items-center justify-center p-6 mx-auto text-gray-600 capitalize dark:text-gray-300">
+        <!-- {
+            links.map(({ href, text }) => {
+                const isActive = currentPath === href;
+
+                return (
+                    <a
+                        href={href}
+                        aria-current={isActive ? 'page' : undefined}
+                        class:list={[
+                            'mx-1.5 sm:mx-6 border-b-2 pb-2 transition-colors duration-200',
+                            isActive
+                                ? 'border-blue-500 text-blue-400'
+                                : 'border-transparent text-gray-200 hover:border-blue-300 hover:text-blue-300'
+                        ]}
+                    >
+                        {text}
+                    </a>
+                );
+            })
+        } -->
+
+        {
+            links.map(({ href, text }) => (
+                <div>
+                    <a
+                        href={href}
+                        class="text-gray-800 dark:text-gray-200 mx-1.5 sm:mx-6"
+                    >
+                        {text}
+                    </a>
+
+                    {currentPath === href ? (
+                        <div 
+                            transition:name="menu-line"  
+                            class="border-b-2 border-blue-500 mx-4" 
+                        />
+                    ): (
+                        <div class="border-b-2 border-transparent" />
+
+                    )}
+                    {/* <div class="border-b-2 border-b-blue-500 mx-5" /> */}
+                </div>
+            )) 
+        }
+
+    </div>
+</nav>
